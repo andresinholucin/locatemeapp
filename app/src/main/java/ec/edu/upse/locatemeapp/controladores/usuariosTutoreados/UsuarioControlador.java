@@ -122,9 +122,9 @@ public class UsuarioControlador extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             //progreso=0;
-            progrescircular.setMax(100);
-            progrescircular.setProgress(0);
-            progrescircular.setVisibility(View.VISIBLE);
+            //progrescircular.setMax(100);
+            //progrescircular.setProgress(0);
+            //progrescircular.setVisibility(View.VISIBLE);
         }
 
         @Override
