@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LocatemeApp</string>
+    <!--opciones del menu contextual para un elemento del listview -->
+    <string name="action_ubicarmapa_item">Ubicar en el Mapa</string>
+    <string name="action_perfil_item">Perfil</string>
+    <string name="action_configuraciones_item">Configuraciones</string>
+</resources>
