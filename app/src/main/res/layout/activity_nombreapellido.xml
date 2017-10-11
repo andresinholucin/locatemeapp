@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context="com.example.gitwyn_pc.usuariov1.configuracionUsuario"
+tools:context="ec.edu.upse.locatemeapp.controladores.usuariosTutoreados.nombreapellido"
 tools:layout_editor_absoluteY="81dp"
 android:layout_centerInParent="true"
 tools:layout_editor_absoluteX="0dp">
@@ -120,11 +120,12 @@ tools:layout_editor_absoluteX="0dp">
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/buttonsiguiente"
+            android:id="@+id/btn_siguiente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:elevation="0dp"
+            android:onClick="btn_siguiente"
             android:text="Siguiente"
             tools:layout_editor_absoluteX="79dp"
             tools:layout_editor_absoluteY="420dp" />

@@ -58,7 +58,7 @@ public class UsuarioControlador extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(getApplicationContext(),GrabarUsuario1.class);
+                Intent i =new Intent(getApplicationContext(),nombreapellido.class);
                 startActivity(i);
             }
         });

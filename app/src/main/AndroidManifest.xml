@@ -19,7 +19,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".controladores.usuariosTutoreados.UsuarioControlador" />
-        <activity android:name=".controladores.usuariosTutoreados.GrabarUsuario1"></activity>
+        <activity android:name=".controladores.usuariosTutoreados.GrabarUsuario1"/>
+        <activity android:name=".controladores.usuariosTutoreados.nombreapellido"/>
+        <activity android:name=".controladores.usuariosTutoreados.datospersonales1"/>
+        <activity android:name=".controladores.usuariosTutoreados.datospersonales2"/>
+        <activity android:name=".controladores.usuariosTutoreados.configuracionUsuario"/>
+        <activity android:name=".controladores.usuariosTutoreados.usuariocontrasenia"/>
     </application>
 
 </manifest>

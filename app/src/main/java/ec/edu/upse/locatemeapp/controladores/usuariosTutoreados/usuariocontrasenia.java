@@ -45,10 +45,10 @@ public class usuariocontrasenia extends AppCompatActivity implements View.OnClic
                 Toast.makeText(getApplicationContext(), "Contraseña Incorrecta!", Toast.LENGTH_LONG).show();
                 return;
             }
-
+/*
             usuario.setUsuUUsuario(txt_usuario.getText().toString());
             usuario.setUsuUClave(txt_contraseña.getText().toString());
-            //validar contraseña
+            //validar contraseña*/
 
             Intent intent=new Intent(usuariocontrasenia.this, datospersonales1.class);
             intent.putExtra("usuario", usuario);

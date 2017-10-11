@@ -6,24 +6,6 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by gitwyn_pc on 22/09/2017.
- * idusuario: 2,
- usuUAnio: "2014",
- usuUApellidos: "Quimi",
- usuUCedula: "2400021964",
- usuUClave: "827ccb0eea8a706c4c34a16891f84e7b",
- usuUCorreo: "quimipedjro@yahoo.com",
- usuUDia: "7",
- usuUDireccion: "Santa Elena",
- usuUEstado: "A",
- usuUMes: "6",
- usuUNombres: "Alberto",
- usuUSms: "A",
- usuUTelefono: "0984249252",
- usuUUsuario: "alberto",
- */
-
 public class Usuario implements Parcelable {
    private Integer idusuario;
     private String  usuUAnio;
@@ -39,10 +21,12 @@ public class Usuario implements Parcelable {
     private String usuUSms;
     private String usuUTelefono;
     private String usuUUsuario;
-
+/*
     private List<UsuarioAsignado> usuarioAsignados1;
 
     private List<UsuarioAsignado> usuarioAsignados2;
+*/
+    private TipoDiscapacidad tipoDiscapacidad;
 
     public Usuario() {
     }
@@ -154,7 +138,7 @@ public class Usuario implements Parcelable {
     public String getUsuUUsuario() {
         return usuUUsuario;
     }
-
+/*
     public void setUsuUUsuario(String usuUUsuario) {
         this.usuUUsuario = usuUUsuario;
     }
@@ -173,7 +157,14 @@ public class Usuario implements Parcelable {
     public void setUsuarioAsignados2(List<UsuarioAsignado> usuarioAsignados2) {
         this.usuarioAsignados2 = usuarioAsignados2;
     }
+*/
+    public TipoDiscapacidad getTipoDiscapacidad() {
+        return tipoDiscapacidad;
+    }
 
+    public void setTipoDiscapacidad(TipoDiscapacidad tipoDiscapacidad) {
+        this.tipoDiscapacidad = tipoDiscapacidad;
+    }
 
     @Override
     public int describeContents() {
@@ -196,8 +187,8 @@ public class Usuario implements Parcelable {
         dest.writeString(this.usuUSms);
         dest.writeString(this.usuUTelefono);
         dest.writeString(this.usuUUsuario);
-        dest.writeList(this.usuarioAsignados1);
-        dest.writeList(this.usuarioAsignados2);
+     /*   dest.writeList(this.usuarioAsignados1);
+        dest.writeList(this.usuarioAsignados2);*/
     }
 
     protected Usuario(Parcel in) {
@@ -215,10 +206,10 @@ public class Usuario implements Parcelable {
         this.usuUSms = in.readString();
         this.usuUTelefono = in.readString();
         this.usuUUsuario = in.readString();
-        this.usuarioAsignados1 = new ArrayList<UsuarioAsignado>();
+       /* this.usuarioAsignados1 = new ArrayList<UsuarioAsignado>();
         in.readList(this.usuarioAsignados1, UsuarioAsignado.class.getClassLoader());
         this.usuarioAsignados2 = new ArrayList<UsuarioAsignado>();
-        in.readList(this.usuarioAsignados2, UsuarioAsignado.class.getClassLoader());
+        in.readList(this.usuarioAsignados2, UsuarioAsignado.class.getClassLoader());*/
     }
 
     public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
