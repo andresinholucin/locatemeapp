@@ -8,42 +8,38 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import ec.edu.upse.locatemeapp.R;
+import ec.edu.upse.locatemeapp.modelo.TipoDiscapacidad;
 import ec.edu.upse.locatemeapp.modelo.Usuario;
 
-public class datospersonales2 extends AppCompatActivity implements View.OnClickListener{
+public class datospersonales2 extends AppCompatActivity{
     EditText txt_correo;
     EditText txt_direccion;
     Button btnaceptar;
     Usuario usuario;
+    TipoDiscapacidad tipoDiscapacidadSeleccionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datospersonales2);
+        anadirElementos();
+    }
+
+    public void anadirElementos(){
         txt_correo=(EditText)findViewById(R.id.editTextcorreo);
         txt_direccion=(EditText)findViewById(R.id.editTextdireccion);
-
         btnaceptar=(Button)findViewById(R.id.buttonaceptar);
-        btnaceptar.setOnClickListener(this);
-
         usuario=getIntent().getParcelableExtra("usuario");
-
-
+        tipoDiscapacidadSeleccionada=getIntent().getParcelableExtra("tipoDiscapacidad");
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v==btnaceptar) {
+    public void btn_aceptar(View view){
+        usuario.setUsuUCorreo(txt_correo.getText().toString());
+        usuario.setUsuUDireccion(txt_direccion.getText().toString());
 
-            usuario.setUsuUCorreo(txt_correo.getText().toString());
-            usuario.setUsuUDireccion(txt_direccion.getText().toString());
-
-            Intent intent=new Intent(datospersonales2.this, configuracionUsuario.class);
-            intent.putExtra("usuario", usuario);
-            startActivity(intent);
-        }
-
-
-        }
+        Intent intent=new Intent(datospersonales2.this, configuracionUsuario.class);
+        intent.putExtra("usuario", usuario);
+        intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
+        startActivity(intent);
     }
-
+}

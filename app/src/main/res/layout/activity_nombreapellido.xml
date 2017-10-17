@@ -106,7 +106,7 @@ tools:layout_editor_absoluteX="0dp">
                 tools:layout_editor_absoluteY="247dp" />
 
             <Spinner
-                android:id="@+id/discapacidades"
+                android:id="@+id/sp_discapacidades"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

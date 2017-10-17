@@ -91,10 +91,11 @@
                     tools:layout_editor_absoluteY="281dp" />
 
                 <Button
-                    android:id="@+id/buttonfecha"
+                    android:id="@+id/btn_fecha"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="btn_fecha"
                     android:text="Buscar" />
             </LinearLayout>
 
@@ -128,10 +129,11 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/buttonsiguiente"
+                android:id="@+id/btn_siguiente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:onClick="btn_siguiente"
                 android:text="Siguiente"
                 tools:layout_editor_absoluteX="79dp"
                 tools:layout_editor_absoluteY="420dp" />

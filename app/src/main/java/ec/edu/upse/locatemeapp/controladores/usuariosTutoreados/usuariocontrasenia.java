@@ -9,14 +9,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ec.edu.upse.locatemeapp.R;
+import ec.edu.upse.locatemeapp.modelo.TipoDiscapacidad;
 import ec.edu.upse.locatemeapp.modelo.Usuario;
 
-public class usuariocontrasenia extends AppCompatActivity implements View.OnClickListener{
+public class usuariocontrasenia extends AppCompatActivity{
     Button btnsiguiente;
     EditText txt_usuario;
     EditText txt_contraseña;
     EditText txt_repitecontraseña;
     Usuario usuario;
+    TipoDiscapacidad tipoDiscapacidadSeleccionada;
 
     String nombre;
     String apellido;
@@ -27,33 +29,36 @@ public class usuariocontrasenia extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuariocontrasenia);
 
-        btnsiguiente=(Button)findViewById(R.id.buttonsiguiente);
-        btnsiguiente.setOnClickListener(this);
+        anadirElementos();
 
+    }
+
+    public void anadirElementos(){
+        btnsiguiente=(Button)findViewById(R.id.btn_siguiente);
         txt_usuario=(EditText)findViewById(R.id.editTextusuario);
         txt_contraseña=(EditText)findViewById(R.id.editTextcontrasenia);
         txt_repitecontraseña=(EditText)findViewById(R.id.editTextrepitecontrasenia);
-
         usuario=getIntent().getParcelableExtra("usuario");
+        tipoDiscapacidadSeleccionada=getIntent().getParcelableExtra("tipoDiscapacidad");
     }
-    //pasar de una pantalla a otra
-    @Override
-    public void onClick(View v) {
-        if(v==btnsiguiente){
 
-            if(!txt_contraseña.getText().toString().equals(txt_repitecontraseña.getText().toString())){
-                Toast.makeText(getApplicationContext(), "Contraseña Incorrecta!", Toast.LENGTH_LONG).show();
-                return;
-            }
-/*
-            usuario.setUsuUUsuario(txt_usuario.getText().toString());
-            usuario.setUsuUClave(txt_contraseña.getText().toString());
-            //validar contraseña*/
+    public void btn_siguiente(View v){
 
-            Intent intent=new Intent(usuariocontrasenia.this, datospersonales1.class);
-            intent.putExtra("usuario", usuario);
-            startActivity(intent);
+        Intent intent=new Intent(usuariocontrasenia.this, datospersonales1.class);
+        intent.putExtra("usuario", usuario);
+        intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
+        startActivity(intent);
+    }
 
+
+    public void validaciones(){
+
+        if(!txt_contraseña.getText().toString().equals(txt_repitecontraseña.getText().toString())){
+            Toast.makeText(getApplicationContext(), "Contraseña Incorrecta!", Toast.LENGTH_LONG).show();
+            return;
         }
     }
+
+
+
 }

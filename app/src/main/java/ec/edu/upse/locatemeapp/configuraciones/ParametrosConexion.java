@@ -6,7 +6,7 @@ package ec.edu.upse.locatemeapp.configuraciones;
 
 public class ParametrosConexion {
      private String puerto="8084";
-     private String direccion="192.168.1.101";
+     private String direccion="192.168.1.105";
      private String aplicacion="/WebServiceAlertasSpring/api/";
 
 

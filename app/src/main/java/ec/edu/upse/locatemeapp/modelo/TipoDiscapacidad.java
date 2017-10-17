@@ -1,10 +1,13 @@
 package ec.edu.upse.locatemeapp.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by gitwyn_pc on 11/10/2017.
  */
 
-public class TipoDiscapacidad {
+public class TipoDiscapacidad implements Parcelable {
     private Long idtipoDiscapacidad;
     private String usuTipoDescripcion;
     private String usuTipoEstado;
@@ -44,4 +47,47 @@ public class TipoDiscapacidad {
     public void setUsuTipoObservaciones(String usuTipoObservaciones) {
         this.usuTipoObservaciones = usuTipoObservaciones;
     }
+
+    @Override
+    public String toString() {
+        return "TipoDiscapacidad{" +
+                "idtipoDiscapacidad=" + idtipoDiscapacidad +
+                ", usuTipoDescripcion='" + usuTipoDescripcion + '\'' +
+                ", usuTipoEstado='" + usuTipoEstado + '\'' +
+                ", usuTipoObservaciones='" + usuTipoObservaciones + '\'' +
+                '}';
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.idtipoDiscapacidad);
+        dest.writeString(this.usuTipoDescripcion);
+        dest.writeString(this.usuTipoEstado);
+        dest.writeString(this.usuTipoObservaciones);
+    }
+
+    protected TipoDiscapacidad(Parcel in) {
+        this.idtipoDiscapacidad = (Long) in.readValue(Long.class.getClassLoader());
+        this.usuTipoDescripcion = in.readString();
+        this.usuTipoEstado = in.readString();
+        this.usuTipoObservaciones = in.readString();
+    }
+
+    public static final Parcelable.Creator<TipoDiscapacidad> CREATOR = new Parcelable.Creator<TipoDiscapacidad>() {
+        @Override
+        public TipoDiscapacidad createFromParcel(Parcel source) {
+            return new TipoDiscapacidad(source);
+        }
+
+        @Override
+        public TipoDiscapacidad[] newArray(int size) {
+            return new TipoDiscapacidad[size];
+        }
+    };
 }

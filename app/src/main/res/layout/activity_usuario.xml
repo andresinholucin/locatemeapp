@@ -8,10 +8,6 @@
     android:layout_height="match_parent"
     tools:context="ec.edu.upse.locatemeapp.controladores.usuariosTutoreados.UsuarioControlador">
 
-
-
-
-
             <ProgressBar
                 android:id="@+id/progressBarcircular"
                 style="?android:attr/progressBarStyle"

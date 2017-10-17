@@ -57,15 +57,11 @@
                     tools:layout_editor_absoluteX="28dp"
                     tools:layout_editor_absoluteY="159dp" />
 
-                <EditText
-                    android:id="@+id/editTexttiemposensado"
+                <Spinner
+                    android:id="@+id/sp_tiempoSensado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number"
-                    tools:layout_editor_absoluteX="28dp"
-                    tools:layout_editor_absoluteY="189dp" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
@@ -89,15 +85,11 @@
                     tools:layout_editor_absoluteX="28dp"
                     tools:layout_editor_absoluteY="247dp" />
 
-                <EditText
-                    android:id="@+id/editTextperimetro"
+                <Spinner
+                    android:id="@+id/sp_perimetro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:inputType="number"
-                    tools:layout_editor_absoluteX="25dp"
-                    tools:layout_editor_absoluteY="281dp" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
