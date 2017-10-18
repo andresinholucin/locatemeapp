@@ -27,6 +27,8 @@ public class Usuario implements Parcelable {
     private List<UsuarioAsignado> usuarioAsignados2;
 */
     private TipoDiscapacidad tipoDiscapacidad;
+    private TiempoSensado tiempoSensado;
+    private Perimetro perimetroSensado;
 
     public Usuario() {
     }
@@ -138,32 +140,49 @@ public class Usuario implements Parcelable {
     public String getUsuUUsuario() {
         return usuUUsuario;
     }
-/*
+
     public void setUsuUUsuario(String usuUUsuario) {
         this.usuUUsuario = usuUUsuario;
     }
-    public List<UsuarioAsignado> getUsuarioAsignados1() {
-        return usuarioAsignados1;
-    }
 
-    public void setUsuarioAsignados1(List<UsuarioAsignado> usuarioAsignados1) {
-        this.usuarioAsignados1 = usuarioAsignados1;
-    }
+    /*   public List<UsuarioAsignado> getUsuarioAsignados1() {
+           return usuarioAsignados1;
+       }
 
-    public List<UsuarioAsignado> getUsuarioAsignados2() {
-        return usuarioAsignados2;
-    }
+       public void setUsuarioAsignados1(List<UsuarioAsignado> usuarioAsignados1) {
+           this.usuarioAsignados1 = usuarioAsignados1;
+       }
 
-    public void setUsuarioAsignados2(List<UsuarioAsignado> usuarioAsignados2) {
-        this.usuarioAsignados2 = usuarioAsignados2;
-    }
-*/
+       public List<UsuarioAsignado> getUsuarioAsignados2() {
+           return usuarioAsignados2;
+       }
+
+       public void setUsuarioAsignados2(List<UsuarioAsignado> usuarioAsignados2) {
+           this.usuarioAsignados2 = usuarioAsignados2;
+       }
+   */
     public TipoDiscapacidad getTipoDiscapacidad() {
         return tipoDiscapacidad;
     }
 
     public void setTipoDiscapacidad(TipoDiscapacidad tipoDiscapacidad) {
         this.tipoDiscapacidad = tipoDiscapacidad;
+    }
+
+    public TiempoSensado getTiempoSensado() {
+        return tiempoSensado;
+    }
+
+    public void setTiempoSensado(TiempoSensado tiempoSensado) {
+        this.tiempoSensado = tiempoSensado;
+    }
+
+    public Perimetro getPerimetroSensado() {
+        return perimetroSensado;
+    }
+
+    public void setPerimetroSensado(Perimetro perimetroSensado) {
+        this.perimetroSensado = perimetroSensado;
     }
 
     @Override
@@ -223,4 +242,27 @@ public class Usuario implements Parcelable {
             return new Usuario[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idusuario=" + idusuario +
+                ", usuUAnio='" + usuUAnio + '\'' +
+                ", usuUApellidos='" + usuUApellidos + '\'' +
+                ", usuUCedula='" + usuUCedula + '\'' +
+                ", usuUClave='" + usuUClave + '\'' +
+                ", usuUCorreo='" + usuUCorreo + '\'' +
+                ", usuUDia='" + usuUDia + '\'' +
+                ", usuUDireccion='" + usuUDireccion + '\'' +
+                ", usuUEstado='" + usuUEstado + '\'' +
+                ", usuUMes='" + usuUMes + '\'' +
+                ", usuUNombres='" + usuUNombres + '\'' +
+                ", usuUSms='" + usuUSms + '\'' +
+                ", usuUTelefono='" + usuUTelefono + '\'' +
+                ", usuUUsuario='" + usuUUsuario + '\'' +
+                ", tipoDiscapacidad=" + tipoDiscapacidad +
+                ", tiempoSensado=" + tiempoSensado +
+                ", perimetroSensado=" + perimetroSensado +
+                '}';
+    }
 }

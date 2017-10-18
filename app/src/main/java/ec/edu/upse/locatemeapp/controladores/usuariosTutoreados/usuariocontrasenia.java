@@ -28,9 +28,7 @@ public class usuariocontrasenia extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuariocontrasenia);
-
         anadirElementos();
-
     }
 
     public void anadirElementos(){
@@ -43,19 +41,26 @@ public class usuariocontrasenia extends AppCompatActivity{
     }
 
     public void btn_siguiente(View v){
+        if (validaciones()){
+            usuario.setUsuUUsuario(txt_usuario.getText().toString());
+            usuario.setUsuUClave(txt_contraseña.getText().toString());
 
-        Intent intent=new Intent(usuariocontrasenia.this, datospersonales1.class);
-        intent.putExtra("usuario", usuario);
-        intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
-        startActivity(intent);
+            Intent intent=new Intent(usuariocontrasenia.this, datospersonales1.class);
+            intent.putExtra("usuario", usuario);
+            intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
+            startActivity(intent);
+        }
     }
 
 
-    public void validaciones(){
+    public Boolean validaciones(){
 
-        if(!txt_contraseña.getText().toString().equals(txt_repitecontraseña.getText().toString())){
-            Toast.makeText(getApplicationContext(), "Contraseña Incorrecta!", Toast.LENGTH_LONG).show();
-            return;
+        if(txt_contraseña.getText().toString().equals(txt_repitecontraseña.getText().toString())){
+            return true;
+        }else{
+            Toast toast= Toast.makeText(getApplicationContext(),"Contraseñas Incorrectas", Toast.LENGTH_LONG);
+            toast.show();
+            return false;
         }
     }
 

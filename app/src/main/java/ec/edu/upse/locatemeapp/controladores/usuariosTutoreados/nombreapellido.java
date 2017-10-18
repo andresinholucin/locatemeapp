@@ -100,7 +100,6 @@ public class nombreapellido extends AppCompatActivity {
     }
 
     public  void btn_siguiente(View view){
-
         Usuario usuario= new Usuario();
         usuario.setUsuUNombres(txt_nombre.getText().toString());
         usuario.setUsuUApellidos(txt_apellido.getText().toString());

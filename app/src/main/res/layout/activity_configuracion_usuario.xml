@@ -129,12 +129,12 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/buttonaceptar"
+                android:id="@+id/btn_aceptar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:elevation="0dp"
-                android:onClick="registrousuario"
+                android:onClick="btn_aceptar"
                 android:text="Aceptar"
                 tools:layout_editor_absoluteX="79dp"
                 tools:layout_editor_absoluteY="420dp" />

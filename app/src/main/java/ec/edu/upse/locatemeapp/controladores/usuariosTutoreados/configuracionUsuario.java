@@ -6,6 +6,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -34,7 +35,6 @@ public class configuracionUsuario extends AppCompatActivity {
     CheckBox chk_sms;
     Button btn_cancelar;
     Button btn_aceptar;
-    Usuario usuario;
     String chk;
     Spinner sp_tiemposensado;
     Spinner sp_perimetro;
@@ -47,6 +47,12 @@ public class configuracionUsuario extends AppCompatActivity {
     ArrayAdapter<String> adaptador;
     List<String> str_ListaTiempoSensado=new ArrayList<String>();
     List<String> str_ListaPerimetro=new ArrayList<String>();
+    Perimetro perimetroSeleccionado;
+    TiempoSensado tiempoSensadoSeleccionado;
+
+    Usuario usuario;
+    TipoDiscapacidad tipoDiscapacidadSeleccionada;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +61,43 @@ public class configuracionUsuario extends AppCompatActivity {
         anadirElementos();
         validacionesIniciales();
 
+        sp_perimetro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                for(Perimetro perimetro: listaPerimetro){
+                    if(perimetro.getUsuPerimetroDescripcion()==sp_perimetro.getSelectedItem()){
+                        perimetroSeleccionado=perimetro;
+                    }
+                }
+                System.out.println(perimetroSeleccionado.getUsuPerimetroDescripcion());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        sp_tiemposensado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                for(TiempoSensado tiempoSensado: listaTiempoSensado){
+                    if(String.valueOf(tiempoSensado.getUsuTiempoDescripcion())==sp_tiemposensado.getSelectedItem()){
+                        tiempoSensadoSeleccionado=tiempoSensado;
+                    }
+                }
+                System.out.println(tiempoSensadoSeleccionado.getUsuTiempoDescripcion());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     public void anadirElementos(){
         sp_perimetro=(Spinner)findViewById(R.id.sp_perimetro);
         sp_tiemposensado=(Spinner)findViewById(R.id.sp_tiempoSensado);
         variablesGenerales = ((VariablesGenerales)getApplicationContext());
+        usuario=getIntent().getParcelableExtra("usuario");
+        tipoDiscapacidadSeleccionada=getIntent().getParcelableExtra("tipoDiscapacidad");
     }
 
     public void validacionesIniciales(){
@@ -89,6 +126,23 @@ public class configuracionUsuario extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void btn_aceptar(View view){
+        if (validaciones()){
+            usuario.setTipoDiscapacidad(tipoDiscapacidadSeleccionada);
+            usuario.setPerimetroSensado(perimetroSeleccionado);
+            usuario.setTiempoSensado(tiempoSensadoSeleccionado);
+
+            System.out.println(usuario);
+            new HttpEnviaPostUsuario().execute();
+
+        }
+
+    }
+
+    public boolean validaciones(){
+    return true;
     }
 
     private class HttpListaTiempoSensado extends AsyncTask<Void, Void, Void > {
@@ -156,6 +210,25 @@ public class configuracionUsuario extends AppCompatActivity {
             adaptador = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,str_ListaPerimetro);
             sp_perimetro.setAdapter(adaptador);
             adaptador.notifyDataSetChanged();
+        }
+    }
+
+
+    private class HttpEnviaPostUsuario extends AsyncTask<Void, Void, Void > {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                //final String url = "http://172.19.11.195:8084/WebServiceAlertasSpring/api/usuariotutoreado/pruebapost/";
+                final String url=con.urlcompeta("usuariotutoreado","registraUsuarioTutoreado/");
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Usuario usu= restTemplate.postForObject(url,usuario,Usuario.class);
+                System.out.println(usu.toString());
+                //return listaUsuarios;
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+            return null;
         }
     }
 }

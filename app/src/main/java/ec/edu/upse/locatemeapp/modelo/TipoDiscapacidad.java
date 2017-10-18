@@ -50,7 +50,7 @@ public class TipoDiscapacidad implements Parcelable {
 
     @Override
     public String toString() {
-        return "TipoDiscapacidad{" +
+        return "{" +
                 "idtipoDiscapacidad=" + idtipoDiscapacidad +
                 ", usuTipoDescripcion='" + usuTipoDescripcion + '\'' +
                 ", usuTipoEstado='" + usuTipoEstado + '\'' +

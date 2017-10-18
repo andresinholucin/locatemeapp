@@ -32,4 +32,13 @@ public class TiempoSensado {
     public void setUsuTiempoEstado(String usuTiempoEstado) {
         this.usuTiempoEstado = usuTiempoEstado;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "idtiempoSensado=" + idtiempoSensado +
+                ", usuTiempoDescripcion=" + usuTiempoDescripcion +
+                ", usuTiempoEstado='" + usuTiempoEstado + '\'' +
+                '}';
+    }
 }

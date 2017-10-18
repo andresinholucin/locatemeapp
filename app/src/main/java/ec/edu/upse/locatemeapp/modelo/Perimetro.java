@@ -32,4 +32,13 @@ public class Perimetro {
     public void setUsuPerimetroEstado(String usuPerimetroEstado) {
         this.usuPerimetroEstado = usuPerimetroEstado;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "idperimetroSensado=" + idperimetroSensado +
+                ", usuPerimetroDescripcion='" + usuPerimetroDescripcion + '\'' +
+                ", usuPerimetroEstado='" + usuPerimetroEstado + '\'' +
+                '}';
+    }
 }

@@ -48,16 +48,24 @@ public class datospersonales1 extends AppCompatActivity {
     }
 
     public void btn_siguiente(View view){
-        usuario.setUsuUCedula(txt_cedula.getText().toString());
-        usuario.setUsuUTelefono(txt_telefono.getText().toString());
-        usuario.setUsuUAnio(String.valueOf(anio));
-        usuario.setUsuUMes(String.valueOf(mes));
-        usuario.setUsuUDia(String.valueOf(dia));
+        if (validaciones()){
+            usuario.setUsuUCedula(txt_cedula.getText().toString());
+            usuario.setUsuUTelefono(txt_telefono.getText().toString());
+            usuario.setUsuUAnio(String.valueOf(anio));
+            usuario.setUsuUMes(String.valueOf(mes));
+            usuario.setUsuUDia(String.valueOf(dia));
 
-        Intent intent=new Intent(datospersonales1.this, datospersonales2.class);
-        intent.putExtra("usuario", usuario);
-        intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
-        startActivity(intent);
+            Intent intent=new Intent(datospersonales1.this, datospersonales2.class);
+            intent.putExtra("usuario", usuario);
+            intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
+            startActivity(intent);
+
+        }
+
+    }
+
+    public Boolean validaciones(){
+        return true;
     }
 
     public void btn_fecha(View view){
