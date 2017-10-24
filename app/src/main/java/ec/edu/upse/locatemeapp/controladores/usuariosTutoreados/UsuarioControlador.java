@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import org.springframework.http.ResponseEntity;
@@ -69,16 +70,27 @@ public class UsuarioControlador extends AppCompatActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println(parent.getItemAtPosition(position));
+
+                String usu;
+                for(Usuario u:listaUsuarios ){
+                    usu=u.getUsuUNombres()+" "+u.getUsuUApellidos();
+                    //System.out.println(usu);
+                    if(usu.equals(parent.getItemAtPosition(position))){
+                        usuarioSeleccionado=u;
+                        System.out.println("ENCONTRASTE IGUAL");
+                    }
+                }
                 /// Obtiene el valor de la casilla elegida
-                String itemSeleccionado = parent.getItemAtPosition(position).toString();
-                usuarioSeleccionado=(Usuario)parent.getItemAtPosition(position);
+                //String itemSeleccionado = parent.getItemAtPosition(position).toString();
+                //usuarioSeleccionado=(Usuario)parent.getItemAtPosition(position);
                 // muestra un mensaje
-                Toast.makeText(getApplicationContext(), "La persona Seleccionada es: " +
+                Toast.makeText(getApplicationContext(), "La persona Seleccionada es: "  +
                         usuarioSeleccionado, Toast.LENGTH_SHORT).show();
             }
         });
-        registerForContextMenu(lista);
 
+        registerForContextMenu(lista);
     }
 
     private void addObjetos(){
@@ -88,18 +100,17 @@ public class UsuarioControlador extends AppCompatActivity {
         floatingActionButton=(FloatingActionButton)findViewById(R.id.flotingaction);
         //progres bar circular
         progrescircular= (ProgressBar)findViewById(R.id.progressBarcircular);
-
     }
-
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         int id=v.getId();
         MenuInflater inflater=getMenuInflater();
+        System.out.println("vas bien");
         switch (id){
             case R.id.listView:
+                //System.out.println(lista.getItemAtPosition());
                 inflater.inflate(R.menu.menu_contextual_listview,menu);
                 break;
         }
@@ -107,14 +118,33 @@ public class UsuarioControlador extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+        AdapterView.AdapterContextMenuInfo info2=(AdapterView.AdapterContextMenuInfo)item.;
+        System.out.println("aaaaaaaaaaaa "+info.toString().toString()+" eeeeeeeee  ");
+/*
+        String usu;
+        for(Usuario u:listaUsuarios ){
+            usu=u.getUsuUNombres()+" "+u.getUsuUApellidos();
+            //System.out.println(usu);
+            if(usu.equals(info.toString())){
+                usuarioSeleccionado=u;
+                System.out.println("ENCONTRASTE IGUAL");
+            }
+        }*/
+
+        switch(item.getItemId()){
+
+            case R.id.action_perfil:
+                Toast.makeText(this,"usuario "+info.position+"  "+info.toString(),Toast.LENGTH_LONG).show();
+                break;
+
+        }
+
         return super.onContextItemSelected(item);
-    }
 
 
-    public void llamarestpost(View view){
-        new HttpEnviaPost().execute();
-        //new HttpEnviaPostUsuario().execute();
     }
+
 
     //metodo para hacer la peticion al web service.- metodo usuaruiotutoreadio y trae la lista de los usuarios que son tutoreados
     private class HttpListaTutoreado extends AsyncTask<Void, Void, Void > {

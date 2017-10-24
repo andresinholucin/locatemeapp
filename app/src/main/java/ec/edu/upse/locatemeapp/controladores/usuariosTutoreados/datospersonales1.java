@@ -2,17 +2,27 @@ package ec.edu.upse.locatemeapp.controladores.usuariosTutoreados;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 import java.util.Calendar;
 
 import ec.edu.upse.locatemeapp.R;
+import ec.edu.upse.locatemeapp.configuraciones.ParametrosConexion;
+import ec.edu.upse.locatemeapp.modelo.TiempoSensado;
 import ec.edu.upse.locatemeapp.modelo.TipoDiscapacidad;
 import ec.edu.upse.locatemeapp.modelo.Usuario;
 
@@ -28,6 +38,7 @@ public class datospersonales1 extends AppCompatActivity {
     Button btnsiguiente;
     Usuario usuario;
     TipoDiscapacidad tipoDiscapacidadSeleccionada;
+    ParametrosConexion con =new ParametrosConexion();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,20 @@ public class datospersonales1 extends AppCompatActivity {
         setContentView(R.layout.activity_datospersonales1);
         anadirElementos();
 
+        txt_cedula.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    System.out.println("perdiste el foco");
+                    valida();
+                }
+            }
+        });
+
+    }
+
+    public void valida(){
+    new HttpValidacionCedula().execute();
     }
 
     public void anadirElementos(){
@@ -90,4 +115,38 @@ public class datospersonales1 extends AppCompatActivity {
     }
 
 
+    private class HttpValidacionCedula extends AsyncTask<Void, Void, Void > {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                String parametro;
+                parametro= "validacedula/"+txt_cedula.getText().toString()+"/";
+                final String url=con.urlcompeta("usuariotutoreado",parametro);
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                ResponseEntity<Boolean> response= restTemplate.getForEntity(url, Boolean.class);
+                //listaTiempoSensado = Arrays.asList(response.getBody());
+                System.out.println(response);
+                if(response.toString()=="true"){
+                    System.out.println("la cedula ya fue registrada");
+                }else{
+                    System.out.println("la cedula no ha sido registrada");
+                }
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+        }
+    }
 }

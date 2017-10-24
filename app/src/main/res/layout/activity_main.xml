@@ -28,4 +28,13 @@
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true" />
 
+    <DatePicker
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:maxDate="23/10/2017"
+        android:minDate="20/10/2017" />
+
 </RelativeLayout>
