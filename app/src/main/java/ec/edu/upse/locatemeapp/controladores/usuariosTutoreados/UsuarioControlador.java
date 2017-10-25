@@ -66,6 +66,13 @@ public class UsuarioControlador extends AppCompatActivity {
 
         new HttpListaTutoreado().execute();
 
+
+        lista.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
         //seleccionar un usuario y llamar a menu emergente
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -105,44 +112,38 @@ public class UsuarioControlador extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        int id=v.getId();
-        MenuInflater inflater=getMenuInflater();
-        System.out.println("vas bien");
-        switch (id){
+        int id = v.getId();
+        MenuInflater inflater = getMenuInflater();
+
+        switch (id) {
             case R.id.listView:
-                //System.out.println(lista.getItemAtPosition());
-                inflater.inflate(R.menu.menu_contextual_listview,menu);
-                break;
+                    inflater.inflate(R.menu.menu_contextual_listview, menu);
+                    break;
         }
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info=(AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-        AdapterView.AdapterContextMenuInfo info2=(AdapterView.AdapterContextMenuInfo)item.;
-        System.out.println("aaaaaaaaaaaa "+info.toString().toString()+" eeeeeeeee  ");
-/*
+
+        //seleccionar un usuario para enviar a otra accion
         String usu;
         for(Usuario u:listaUsuarios ){
             usu=u.getUsuUNombres()+" "+u.getUsuUApellidos();
             //System.out.println(usu);
-            if(usu.equals(info.toString())){
+            if(usu.equals(lista.getItemAtPosition(info.position))){
                 usuarioSeleccionado=u;
-                System.out.println("ENCONTRASTE IGUAL");
             }
-        }*/
+        }
 
         switch(item.getItemId()){
-
             case R.id.action_perfil:
-                Toast.makeText(this,"usuario "+info.position+"  "+info.toString(),Toast.LENGTH_LONG).show();
+
+                Toast.makeText(this,"usuario "+info.position+"  "+usuarioSeleccionado,Toast.LENGTH_LONG).show();
                 break;
 
         }
-
         return super.onContextItemSelected(item);
-
-
     }
 
 
