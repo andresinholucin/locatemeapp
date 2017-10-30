@@ -66,7 +66,7 @@ public class datospersonales1 extends AppCompatActivity {
         buttonfecha= (Button)findViewById(R.id.btn_fecha);
         textfecha=(EditText)findViewById(R.id.editTextfechanacimiento);
         txt_cedula=(EditText)findViewById(R.id.editTextcedula);
-        txt_telefono=(EditText)findViewById(R.id.editTexttelefono);
+        //txt_telefono=(EditText)findViewById(R.id.editTexttelefono);
         btnsiguiente=(Button)findViewById(R.id.btn_siguiente);
         usuario=getIntent().getParcelableExtra("usuario");
         tipoDiscapacidadSeleccionada=getIntent().getParcelableExtra("tipoDiscapacidad");
@@ -75,12 +75,12 @@ public class datospersonales1 extends AppCompatActivity {
     public void btn_siguiente(View view){
         if (validaciones()){
             usuario.setUsuUCedula(txt_cedula.getText().toString());
-            usuario.setUsuUTelefono(txt_telefono.getText().toString());
+            //usuario.setUsuUTelefono(txt_telefono.getText().toString());
             usuario.setUsuUAnio(String.valueOf(anio));
             usuario.setUsuUMes(String.valueOf(mes));
             usuario.setUsuUDia(String.valueOf(dia));
 
-            Intent intent=new Intent(datospersonales1.this, datospersonales2.class);
+            Intent intent=new Intent(datospersonales1.this, configuracionUsuario.class);
             intent.putExtra("usuario", usuario);
             intent.putExtra("tipoDiscapacidad", tipoDiscapacidadSeleccionada);
             startActivity(intent);

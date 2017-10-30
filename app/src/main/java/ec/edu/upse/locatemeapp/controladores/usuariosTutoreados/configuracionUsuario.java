@@ -53,6 +53,8 @@ public class configuracionUsuario extends AppCompatActivity {
     Usuario usuario;
     TipoDiscapacidad tipoDiscapacidadSeleccionada;
 
+    String accion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +92,9 @@ public class configuracionUsuario extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        Toast.makeText(this,"usuario "+ usuario,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, accion,Toast.LENGTH_LONG).show();
     }
 
     public void anadirElementos(){
@@ -97,6 +102,7 @@ public class configuracionUsuario extends AppCompatActivity {
         sp_tiemposensado=(Spinner)findViewById(R.id.sp_tiempoSensado);
         variablesGenerales = ((VariablesGenerales)getApplicationContext());
         usuario=getIntent().getParcelableExtra("usuario");
+        accion=getIntent().getStringExtra("accion");
         tipoDiscapacidadSeleccionada=getIntent().getParcelableExtra("tipoDiscapacidad");
     }
 

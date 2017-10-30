@@ -139,7 +139,19 @@ public class UsuarioControlador extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.action_perfil:
 
-                Toast.makeText(this,"usuario "+info.position+"  "+usuarioSeleccionado,Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(UsuarioControlador.this, perfilUsuarioTutoreado.class);
+                intent.putExtra("usuario", usuarioSeleccionado);
+                startActivity(intent);
+
+                //Toast.makeText(this,"usuario "+info.position+"  "+usuarioSeleccionado,Toast.LENGTH_LONG).show();
+                break;
+            case R.id.action_configuraciones:
+
+                Intent intentConfiguraciones=new Intent(UsuarioControlador.this, configuracionUsuario.class);
+                intentConfiguraciones.putExtra("usuario", usuarioSeleccionado);
+                intentConfiguraciones.putExtra("accion", "menuconfigurar");
+                startActivity(intentConfiguraciones);
+
                 break;
 
         }

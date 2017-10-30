@@ -21,11 +21,7 @@ public class Usuario implements Parcelable {
     private String usuUSms;
     private String usuUTelefono;
     private String usuUUsuario;
-/*
-    private List<UsuarioAsignado> usuarioAsignados1;
 
-    private List<UsuarioAsignado> usuarioAsignados2;
-*/
     private TipoDiscapacidad tipoDiscapacidad;
     private TiempoSensado tiempoSensado;
     private Perimetro perimetroSensado;
@@ -145,22 +141,6 @@ public class Usuario implements Parcelable {
         this.usuUUsuario = usuUUsuario;
     }
 
-    /*   public List<UsuarioAsignado> getUsuarioAsignados1() {
-           return usuarioAsignados1;
-       }
-
-       public void setUsuarioAsignados1(List<UsuarioAsignado> usuarioAsignados1) {
-           this.usuarioAsignados1 = usuarioAsignados1;
-       }
-
-       public List<UsuarioAsignado> getUsuarioAsignados2() {
-           return usuarioAsignados2;
-       }
-
-       public void setUsuarioAsignados2(List<UsuarioAsignado> usuarioAsignados2) {
-           this.usuarioAsignados2 = usuarioAsignados2;
-       }
-   */
     public TipoDiscapacidad getTipoDiscapacidad() {
         return tipoDiscapacidad;
     }
@@ -186,64 +166,6 @@ public class Usuario implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.idusuario);
-        dest.writeString(this.usuUAnio);
-        dest.writeString(this.usuUApellidos);
-        dest.writeString(this.usuUCedula);
-        dest.writeString(this.usuUClave);
-        dest.writeString(this.usuUCorreo);
-        dest.writeString(this.usuUDia);
-        dest.writeString(this.usuUDireccion);
-        dest.writeString(this.usuUEstado);
-        dest.writeString(this.usuUMes);
-        dest.writeString(this.usuUNombres);
-        dest.writeString(this.usuUSms);
-        dest.writeString(this.usuUTelefono);
-        dest.writeString(this.usuUUsuario);
-     /*   dest.writeList(this.usuarioAsignados1);
-        dest.writeList(this.usuarioAsignados2);*/
-    }
-
-    protected Usuario(Parcel in) {
-        this.idusuario = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.usuUAnio = in.readString();
-        this.usuUApellidos = in.readString();
-        this.usuUCedula = in.readString();
-        this.usuUClave = in.readString();
-        this.usuUCorreo = in.readString();
-        this.usuUDia = in.readString();
-        this.usuUDireccion = in.readString();
-        this.usuUEstado = in.readString();
-        this.usuUMes = in.readString();
-        this.usuUNombres = in.readString();
-        this.usuUSms = in.readString();
-        this.usuUTelefono = in.readString();
-        this.usuUUsuario = in.readString();
-       /* this.usuarioAsignados1 = new ArrayList<UsuarioAsignado>();
-        in.readList(this.usuarioAsignados1, UsuarioAsignado.class.getClassLoader());
-        this.usuarioAsignados2 = new ArrayList<UsuarioAsignado>();
-        in.readList(this.usuarioAsignados2, UsuarioAsignado.class.getClassLoader());*/
-    }
-
-    public static final Parcelable.Creator<Usuario> CREATOR = new Parcelable.Creator<Usuario>() {
-        @Override
-        public Usuario createFromParcel(Parcel source) {
-            return new Usuario(source);
-        }
-
-        @Override
-        public Usuario[] newArray(int size) {
-            return new Usuario[size];
-        }
-    };
-
-    @Override
     public String toString() {
         return "Usuario{" +
                 "idusuario=" + idusuario +
@@ -265,4 +187,62 @@ public class Usuario implements Parcelable {
                 ", perimetroSensado=" + perimetroSensado +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.idusuario);
+        dest.writeString(this.usuUAnio);
+        dest.writeString(this.usuUApellidos);
+        dest.writeString(this.usuUCedula);
+        dest.writeString(this.usuUClave);
+        dest.writeString(this.usuUCorreo);
+        dest.writeString(this.usuUDia);
+        dest.writeString(this.usuUDireccion);
+        dest.writeString(this.usuUEstado);
+        dest.writeString(this.usuUMes);
+        dest.writeString(this.usuUNombres);
+        dest.writeString(this.usuUSms);
+        dest.writeString(this.usuUTelefono);
+        dest.writeString(this.usuUUsuario);
+        dest.writeParcelable(this.tipoDiscapacidad, flags);
+        dest.writeParcelable(this.tiempoSensado, flags);
+        dest.writeParcelable(this.perimetroSensado, flags);
+    }
+
+    protected Usuario(Parcel in) {
+        this.idusuario = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.usuUAnio = in.readString();
+        this.usuUApellidos = in.readString();
+        this.usuUCedula = in.readString();
+        this.usuUClave = in.readString();
+        this.usuUCorreo = in.readString();
+        this.usuUDia = in.readString();
+        this.usuUDireccion = in.readString();
+        this.usuUEstado = in.readString();
+        this.usuUMes = in.readString();
+        this.usuUNombres = in.readString();
+        this.usuUSms = in.readString();
+        this.usuUTelefono = in.readString();
+        this.usuUUsuario = in.readString();
+        this.tipoDiscapacidad = in.readParcelable(TipoDiscapacidad.class.getClassLoader());
+        this.tiempoSensado = in.readParcelable(TiempoSensado.class.getClassLoader());
+        this.perimetroSensado = in.readParcelable(Perimetro.class.getClassLoader());
+    }
+
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel source) {
+            return new Usuario(source);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 }

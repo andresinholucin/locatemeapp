@@ -1,10 +1,13 @@
 package ec.edu.upse.locatemeapp.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by gitwyn_pc on 05/10/2017.
  */
 
-public class TiempoSensado {
+public class TiempoSensado implements Parcelable {
     private Long idtiempoSensado;
     private int usuTiempoDescripcion;
     private String usuTiempoEstado;
@@ -41,4 +44,37 @@ public class TiempoSensado {
                 ", usuTiempoEstado='" + usuTiempoEstado + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.idtiempoSensado);
+        dest.writeInt(this.usuTiempoDescripcion);
+        dest.writeString(this.usuTiempoEstado);
+    }
+
+    public TiempoSensado() {
+    }
+
+    protected TiempoSensado(Parcel in) {
+        this.idtiempoSensado = (Long) in.readValue(Long.class.getClassLoader());
+        this.usuTiempoDescripcion = in.readInt();
+        this.usuTiempoEstado = in.readString();
+    }
+
+    public static final Parcelable.Creator<TiempoSensado> CREATOR = new Parcelable.Creator<TiempoSensado>() {
+        @Override
+        public TiempoSensado createFromParcel(Parcel source) {
+            return new TiempoSensado(source);
+        }
+
+        @Override
+        public TiempoSensado[] newArray(int size) {
+            return new TiempoSensado[size];
+        }
+    };
 }

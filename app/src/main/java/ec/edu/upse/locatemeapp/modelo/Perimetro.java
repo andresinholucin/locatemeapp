@@ -1,10 +1,13 @@
 package ec.edu.upse.locatemeapp.modelo;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by gitwyn_pc on 05/10/2017.
  */
 
-public class Perimetro {
+public class Perimetro implements Parcelable {
     private int idperimetroSensado;
     private String usuPerimetroDescripcion;
     private String usuPerimetroEstado;
@@ -41,4 +44,37 @@ public class Perimetro {
                 ", usuPerimetroEstado='" + usuPerimetroEstado + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.idperimetroSensado);
+        dest.writeString(this.usuPerimetroDescripcion);
+        dest.writeString(this.usuPerimetroEstado);
+    }
+
+    public Perimetro() {
+    }
+
+    protected Perimetro(Parcel in) {
+        this.idperimetroSensado = in.readInt();
+        this.usuPerimetroDescripcion = in.readString();
+        this.usuPerimetroEstado = in.readString();
+    }
+
+    public static final Parcelable.Creator<Perimetro> CREATOR = new Parcelable.Creator<Perimetro>() {
+        @Override
+        public Perimetro createFromParcel(Parcel source) {
+            return new Perimetro(source);
+        }
+
+        @Override
+        public Perimetro[] newArray(int size) {
+            return new Perimetro[size];
+        }
+    };
 }
