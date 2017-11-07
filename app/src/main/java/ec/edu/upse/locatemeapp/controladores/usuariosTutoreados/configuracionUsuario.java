@@ -61,8 +61,9 @@ public class configuracionUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_configuracion_usuario);
 
         anadirElementos();
-        validacionesIniciales();
 
+
+        //selecciona un elemento del spinner perimetros
         sp_perimetro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -71,13 +72,14 @@ public class configuracionUsuario extends AppCompatActivity {
                         perimetroSeleccionado=perimetro;
                     }
                 }
-                System.out.println(perimetroSeleccionado.getUsuPerimetroDescripcion());
+                //System.out.println(perimetroSeleccionado.getUsuPerimetroDescripcion());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
+        //selecciona un elemento del spinner tiempos sensados
         sp_tiemposensado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -86,20 +88,22 @@ public class configuracionUsuario extends AppCompatActivity {
                         tiempoSensadoSeleccionado=tiempoSensado;
                     }
                 }
-                System.out.println(tiempoSensadoSeleccionado.getUsuTiempoDescripcion());
+                //System.out.println(tiempoSensadoSeleccionado.getUsuTiempoDescripcion());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        Toast.makeText(this,"usuario "+ usuario,Toast.LENGTH_LONG).show();
+        validacionesIniciales();
+        //Toast.makeText(this,"usuario "+ usuario,Toast.LENGTH_LONG).show();
         Toast.makeText(this, accion,Toast.LENGTH_LONG).show();
     }
 
     public void anadirElementos(){
         sp_perimetro=(Spinner)findViewById(R.id.sp_perimetro);
         sp_tiemposensado=(Spinner)findViewById(R.id.sp_tiempoSensado);
+        chk_sms=(CheckBox)findViewById(R.id.checkBoxsms);
         variablesGenerales = ((VariablesGenerales)getApplicationContext());
         usuario=getIntent().getParcelableExtra("usuario");
         accion=getIntent().getStringExtra("accion");
@@ -110,6 +114,8 @@ public class configuracionUsuario extends AppCompatActivity {
         listaTiempoSensado= variablesGenerales.getListaTiempoSensado();
         listaPerimetro=variablesGenerales.getListaPerimetro();
 
+        //validacion para no hacer peticion mas de dos veces una vez abierta la aplicacion para tiempos sensados,
+        // estos solo se llenan en caso de que la peticion ya fue hecha
         if (listaTiempoSensado==null){
             new HttpListaTiempoSensado().execute();
         }else{
@@ -121,6 +127,8 @@ public class configuracionUsuario extends AppCompatActivity {
             adaptador.notifyDataSetChanged();
         }
 
+        //validacion para no hacer peticion mas de dos veces una vez abierta la aplicacion para los perimetros de configuracion,
+        // estos solo se llenan en caso de que la peticion ya fue hecha
         if(listaPerimetro==null){
             new HttpListaPerimetros().execute();
         }else{
@@ -130,6 +138,25 @@ public class configuracionUsuario extends AppCompatActivity {
                 sp_perimetro.setAdapter(adaptador);
                 adaptador.notifyDataSetChanged();
             }
+        }
+
+        if(accion==null){
+            Toast.makeText(this, "accion nulo", Toast.LENGTH_SHORT).show();
+        }else if(accion.equals("menuconfigurar")){
+            //este codigo se ejecuta cuando de la lista de tutoreados nos movemos a la configuracion del tutoreado
+            Toast.makeText(this, " estas listo", Toast.LENGTH_SHORT).show();
+            //desactivar combos
+            sp_tiemposensado.setEnabled(false);
+            sp_perimetro.setEnabled(false);
+            chk_sms.setEnabled(false);
+
+            //llenar con predeterminados
+            int a= usuario.getTiempoSensado().getUsuTiempoDescripcion();
+            String b=usuario.getPerimetroSensado().getUsuPerimetroDescripcion();
+
+            
+            System.out.println(sp_tiemposensado);
+            System.out.println(a+" y "+b);
         }
 
     }
