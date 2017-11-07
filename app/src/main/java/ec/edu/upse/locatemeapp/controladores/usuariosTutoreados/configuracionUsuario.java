@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -38,6 +39,8 @@ public class configuracionUsuario extends AppCompatActivity {
     String chk;
     Spinner sp_tiemposensado;
     Spinner sp_perimetro;
+    TextView txt_tiemposensado;
+    TextView txt_perimetro;
 
     ParametrosConexion con =new ParametrosConexion();
 
@@ -83,6 +86,8 @@ public class configuracionUsuario extends AppCompatActivity {
         sp_tiemposensado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //if()
+
                 for(TiempoSensado tiempoSensado: listaTiempoSensado){
                     if(String.valueOf(tiempoSensado.getUsuTiempoDescripcion())==sp_tiemposensado.getSelectedItem()){
                         tiempoSensadoSeleccionado=tiempoSensado;
@@ -97,13 +102,18 @@ public class configuracionUsuario extends AppCompatActivity {
 
         validacionesIniciales();
         //Toast.makeText(this,"usuario "+ usuario,Toast.LENGTH_LONG).show();
-        Toast.makeText(this, accion,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, accion,Toast.LENGTH_LONG).show();
+
+
     }
 
     public void anadirElementos(){
         sp_perimetro=(Spinner)findViewById(R.id.sp_perimetro);
         sp_tiemposensado=(Spinner)findViewById(R.id.sp_tiempoSensado);
         chk_sms=(CheckBox)findViewById(R.id.checkBoxsms);
+        txt_tiemposensado=(TextView)findViewById(R.id.txt_tiemposensado);
+        txt_perimetro=(TextView)findViewById(R.id.txt_perimetro);
+
         variablesGenerales = ((VariablesGenerales)getApplicationContext());
         usuario=getIntent().getParcelableExtra("usuario");
         accion=getIntent().getStringExtra("accion");
@@ -149,29 +159,42 @@ public class configuracionUsuario extends AppCompatActivity {
             sp_tiemposensado.setEnabled(false);
             sp_perimetro.setEnabled(false);
             chk_sms.setEnabled(false);
+            sp_tiemposensado.setVisibility(View.INVISIBLE);
+            sp_perimetro.setVisibility(View.INVISIBLE);
 
             //llenar con predeterminados
-            int a= usuario.getTiempoSensado().getUsuTiempoDescripcion();
+            Integer a= usuario.getTiempoSensado().getUsuTiempoDescripcion();
             String b=usuario.getPerimetroSensado().getUsuPerimetroDescripcion();
+            String c=usuario.getUsuUSms();
+            System.out.println(c);
+            if(c.equals("A")){
+                chk_sms.setChecked(true);
+            }else chk_sms.setChecked(false);
 
-            
-            System.out.println(sp_tiemposensado);
-            System.out.println(a+" y "+b);
+            txt_tiemposensado.setText(a.toString());
+            txt_perimetro.setText(b);
+
+
         }
 
     }
 
     public void btn_aceptar(View view){
-        if (validaciones()){
-            usuario.setTipoDiscapacidad(tipoDiscapacidadSeleccionada);
-            usuario.setPerimetroSensado(perimetroSeleccionado);
-            usuario.setTiempoSensado(tiempoSensadoSeleccionado);
+        if(accion.equals("menuconfigurar")){
 
-            System.out.println(usuario);
-            new HttpEnviaPostUsuario().execute();
+        }else{
+
+            if (validaciones()){
+                usuario.setTipoDiscapacidad(tipoDiscapacidadSeleccionada);
+                usuario.setPerimetroSensado(perimetroSeleccionado);
+                usuario.setTiempoSensado(tiempoSensadoSeleccionado);
+
+                System.out.println(usuario);
+                new HttpEnviaPostUsuario().execute();
+
+            }
 
         }
-
     }
 
     public boolean validaciones(){
