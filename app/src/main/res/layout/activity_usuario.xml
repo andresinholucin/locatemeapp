@@ -22,37 +22,6 @@
                 android:layout_height="match_parent"
                 />
 
-    <!--
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/btn_rest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="llamarest"
-                android:text="ButtonRest" />
-
-            <Button
-                android:id="@+id/btn_rest_post"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="llamarestpost"
-                android:text="Boton envia post" />
-
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="355dp"
-                />
-
-
-        </LinearLayout>
-
-     -->
-
 
     <android.support.design.widget.FloatingActionButton
     android:layout_width="wrap_content"
