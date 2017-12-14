@@ -114,10 +114,13 @@ public class configuracionUsuario extends AppCompatActivity {
         txt_tiemposensado=(TextView)findViewById(R.id.txt_tiemposensado);
         txt_perimetro=(TextView)findViewById(R.id.txt_perimetro);
 
+
         variablesGenerales = ((VariablesGenerales)getApplicationContext());
         usuario=getIntent().getParcelableExtra("usuario");
         accion=getIntent().getStringExtra("accion");
         tipoDiscapacidadSeleccionada=getIntent().getParcelableExtra("tipoDiscapacidad");
+
+
     }
 
     public void validacionesIniciales(){
@@ -152,6 +155,8 @@ public class configuracionUsuario extends AppCompatActivity {
 
         if(accion==null){
             Toast.makeText(this, "accion nulo", Toast.LENGTH_SHORT).show();
+            btn_aceptar.setText("Guardar");
+
         }else if(accion.equals("menuconfigurar")){
             //este codigo se ejecuta cuando de la lista de tutoreados nos movemos a la configuracion del tutoreado
             Toast.makeText(this, " estas listo", Toast.LENGTH_SHORT).show();
@@ -174,7 +179,7 @@ public class configuracionUsuario extends AppCompatActivity {
             txt_tiemposensado.setText(a.toString());
             txt_perimetro.setText(b);
 
-
+            btn_aceptar.setText("Modificar");
         }
 
     }
